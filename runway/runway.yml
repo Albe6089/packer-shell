@@ -1,0 +1,15 @@
+---
+# See full syntax at https://docs.onica.com/projects/runway/en/latest/
+deployments:
+  - modules:
+      - path: vpc.cfn
+        parameters:
+          account_id: ${env ACCOUNT_ID}
+      - path: jenkins.cfn
+        parameters:
+          account_id: ${env ACCOUNT_ID}
+      - path: img-mgr.cfn
+        parameters:
+          account_id: ${env ACCOUNT_ID}
+    regions:
+      - us-west-2

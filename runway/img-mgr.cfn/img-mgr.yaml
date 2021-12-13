@@ -1,0 +1,19 @@
+namespace: ${customer}-${environment}
+cfngin_bucket: ${mgmt_bucket}-${account_id}
+sys_path: ./
+
+stacks:
+  img-mgr:
+    template_path: templates/imgmgr-cfn.json # also supports json templates
+    variables:
+      EnvironmentName: ${environment}
+      CustomerName: ${customer}
+      ApplicationName: img-mgr
+      SshKey: ${ssh_key}
+      # https://docs.onica.com/projects/runway/en/stable/cfngin/lookups.html#ssm
+      ImageId: ${ssm /common/img-mgr/golden-ami}
+      VpcId: ${xref ${customer}-common-vpc::VPC}
+      LoadBalancerSubnets: ${xref ${customer}-common-vpc::PublicSubnets}
+      Subnets: ${xref ${customer}-common-vpc::PrivateSubnets}
+      AvailabilityZones: ${region}a,${region}b
+      AppServerMaxCount: 2

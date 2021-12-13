@@ -1,0 +1,211 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Jenkins server and s3 backup bucket - 1.1.1",
+  "Parameters": {
+    "CustomerName": {
+      "Type": "String",
+      "Description": "Environment to which this stack belongs"
+    },
+    "VpcId": {
+      "Type": "AWS::EC2::VPC::Id",
+      "Description": "VPC used"
+    },
+    "SshKey": {
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "Description": "SSH Key pair to auth with"
+    },
+    "InstanceSubnets": {
+      "Type": "List<AWS::EC2::Subnet::Id>",
+      "Description": "List of subnets for instances to live within"
+    },
+    "ImageId": {
+      "Type": "AWS::EC2::Image::Id",
+      "Description": "The AMI to base this instance off of",
+    },
+    "RootStorageGigs": {
+      "Type": "String",
+      "Description": "Amount of EBS storage to be assigned to Root partition in gigabytes",
+      "Default": "100"
+    },
+    "InstanceType": {
+      "Type": "String",
+      "Description": "Instnace size",
+      "Default": "t2.small",
+      "AllowedValues": [
+        "c3.2xlarge",
+        "c3.4xlarge",
+        "c3.8xlarge",
+        "c3.large",
+        "c3.xlarge",
+        "c4.2xlarge",
+        "c4.4xlarge",
+        "c4.8xlarge",
+        "c4.large",
+        "c4.xlarge",
+        "d2.2xlarge",
+        "d2.4xlarge",
+        "d2.8xlarge",
+        "d2.xlarge",
+        "g2.2xlarge",
+        "g2.8xlarge",
+        "i2.2xlarge",
+        "i2.4xlarge",
+        "i2.8xlarge",
+        "i2.xlarge",
+        "m1.xlarge",
+        "m3.2xlarge",
+        "m3.large",
+        "m3.medium",
+        "m3.xlarge",
+        "m4.10xlarge",
+        "m4.2xlarge",
+        "m4.4xlarge",
+        "m4.large",
+        "m4.xlarge",
+        "r3.2xlarge",
+        "r3.4xlarge",
+        "r3.8xlarge",
+        "r3.large",
+        "r3.xlarge",
+        "t2.large",
+        "t2.medium",
+        "t2.micro",
+        "t2.small"
+      ]
+    }
+  },
+  "Resources": {
+    "iamRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [{
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [ "ec2.amazonaws.com" ]
+            },
+            "Action": [ "sts:AssumeRole" ]
+            }]
+          },
+          "Path": "/",
+          "Policies": [
+            {
+              "PolicyName": {"Fn::Join": ["-",
+                [
+                  "jenkins-cd",
+                  "all-the-access"
+                ]]
+              },
+              "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [ "*" ],
+                    "Resource": [ "*" ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "iamInstanceProfile": {
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties": {
+          "Path": "/",
+          "Roles": [ {"Ref": "iamRole"} ]
+        }
+      },
+      "AllowElbSg" : {
+        "Type" : "AWS::EC2::SecurityGroup",
+        "Properties" : {
+          "GroupDescription": "jenkins-allowed-elb-sg",
+          "SecurityGroupIngress" : [
+            {
+              "CidrIp" : "0.0.0.0/0",
+              "FromPort": 8080,
+              "ToPort": 8080,
+              "IpProtocol": "tcp"
+            }
+          ],
+          "VpcId": {"Ref": "VpcId"}
+        }
+      },
+      "JenkinsServerGroup": {
+        "Type": "AWS::AutoScaling::AutoScalingGroup",
+        "Properties": {
+          "MinSize": "1",
+          "MaxSize": "1",
+          "AvailabilityZones" : [
+            {"Fn::Select": [ 0, {"Fn::GetAZs": ""}]},
+            {"Fn::Select": [ 1, {"Fn::GetAZs": ""}]}
+          ],
+          "HealthCheckType": "EC2",
+          "LaunchConfigurationName": {"Ref": "JenkinsLaunchConfig"},
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    {"Ref": "CustomerName"},
+                    "jenkins"
+                  ]
+                ]
+              },
+              "PropagateAtLaunch": true
+            }
+          ],
+          "VPCZoneIdentifier": {"Ref": "InstanceSubnets"}
+        }
+      },
+      "JenkinsLaunchConfig": {
+        "Type": "AWS::AutoScaling::LaunchConfiguration",
+        "Properties": {
+          "KeyName": {"Ref": "SshKey"},
+          "ImageId": {"Ref": "ImageId"},
+          "InstanceType": {"Ref": "InstanceType"},
+          "AssociatePublicIpAddress": true,
+          "IamInstanceProfile": {"Ref": "iamInstanceProfile"},
+          "BlockDeviceMappings": [
+            {
+              "DeviceName": "/dev/xvda",
+              "Ebs": { "VolumeSize": {"Ref": "RootStorageGigs"} }
+            }
+          ],
+          "SecurityGroups" :  [
+            {"Ref": "AllowElbSg"}
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "\n",
+                [
+                  "#!/bin/bash",
+                  "yum update -y",
+                  "wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo",
+                  "rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key",
+                  "yum upgrade",
+                  "amazon-linux-extras install epel -y",
+                  "yum update -y",
+                  "yum install jenkins java-1.8.0-openjdk-devel git yum-utils -y",
+                  "yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo",
+                  "yum -y install packer",
+                  "pip3.7 install pipenv",
+                  "systemctl start jenkins"
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Outputs": {
+      "JenkinsAllowSG": {
+        "Description": "Allows access to the Jenkins Server directly",
+        "Value": {"Ref": "AllowElbSg"}
+      }
+    }
+  }

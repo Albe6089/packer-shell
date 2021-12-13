@@ -1,0 +1,15 @@
+namespace: ${customer}-${environment}
+sys_path: ./
+cfngin_bucket: ${mgmt_bucket}-${account_id}
+
+stacks:
+  jenkins:
+    template_path: templates/jenkins.json # also supports json templates
+    variables:
+      EnvironmentName: ${environment}
+      CustomerName: ${customer}
+      ImageId: ${image_id}
+      VpcId: ${xref ${customer}-common-vpc::VPC}
+      AllSecurityGroup:
+      SshKey: ${ssh_key}
+      InstanceSubnets: ${xref ${customer}-common-vpc::PublicSubnets}

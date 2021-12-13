@@ -1,0 +1,349 @@
+[1;32mamazon-ebs: output will be in this color.[0m
+
+[1;32m==> amazon-ebs: Prevalidating any provided VPC information[0m
+[1;32m==> amazon-ebs: Prevalidating AMI Name: my-ami-1638916889[0m
+[0;32m    amazon-ebs: Found Image ID: ami-083ac7c7ecf9bb9b0[0m
+[1;32m==> amazon-ebs: Creating temporary keypair: packer_61afe319-e94a-b7a9-8a81-4ca2b4da367e[0m
+[1;32m==> amazon-ebs: Creating temporary security group for this instance: packer_61afe31d-4f86-a2c1-b9c9-75a2d1213dbb[0m
+[1;32m==> amazon-ebs: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...[0m
+[1;32m==> amazon-ebs: Launching a source AWS instance...[0m
+[1;32m==> amazon-ebs: Adding tags to source instance[0m
+[0;32m    amazon-ebs: Adding tag: "Name": "Packer Builder"[0m
+[0;32m    amazon-ebs: Instance ID: i-03e7c0bdbe54cd2a7[0m
+[1;32m==> amazon-ebs: Waiting for instance (i-03e7c0bdbe54cd2a7) to become ready...[0m
+[1;32m==> amazon-ebs: Using ssh communicator to connect: 34.209.219.224[0m
+[1;32m==> amazon-ebs: Waiting for SSH to become available...[0m
+[1;32m==> amazon-ebs: Connected to SSH![0m
+[1;32m==> amazon-ebs: Uploading install_my_app.sh => /tmp/install_my_app.sh[0m
+install_my_app.sh 1.49 KiB / 1.49 KiB [====================================================================================================================] 100.00%
+[1Ainstall_my_app.sh 1.49 KiB / 1.49 KiB [=================================================================================================================] 100.00% 0s
+[1;32m==> amazon-ebs: Provisioning with shell script: /var/folders/kk/5wk882ds283dtgsm83vsdbk8_8qk91/T/packer-shell218330676[0m
+[0;32m    amazon-ebs: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd[0m
+[1;31m==> amazon-ebs: Existing lock /var/run/yum.pid: another copy is running as pid 2451.[0m
+[1;31m==> amazon-ebs: Another app is currently holding the yum lock; waiting for it to exit...[0m
+[1;31m==> amazon-ebs:   The other application is: yum[0m
+[1;31m==> amazon-ebs:     Memory : 156 M RSS (448 MB VSZ)[0m
+[1;31m==> amazon-ebs:     Started: Tue Dec  7 22:41:54 2021 - 00:08 ago[0m
+[1;31m==> amazon-ebs:     State  : Running, pid: 2451[0m
+[0;32m    amazon-ebs: Resolving Dependencies[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package git.x86_64 0:2.32.0-1.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: --> Processing Dependency: perl-Git = 2.32.0-1.amzn2.0.1 for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: git-core-doc = 2.32.0-1.amzn2.0.1 for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: git-core = 2.32.0-1.amzn2.0.1 for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: emacs-filesystem >= 27.1 for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: perl(Term::ReadKey) for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: perl(Git::I18N) for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: perl(Git) for package: git-2.32.0-1.amzn2.0.1.x86_64[0m
+[0;32m    amazon-ebs: ---> Package jq.x86_64 0:1.5-1.amzn2.0.2 will be installed[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libonig.so.2()(64bit) for package: jq-1.5-1.amzn2.0.2.x86_64[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package emacs-filesystem.noarch 1:27.2-4.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: ---> Package git-core.x86_64 0:2.32.0-1.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: ---> Package git-core-doc.noarch 0:2.32.0-1.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: ---> Package oniguruma.x86_64 0:5.9.6-1.amzn2.0.4 will be installed[0m
+[0;32m    amazon-ebs: ---> Package perl-Git.noarch 0:2.32.0-1.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: --> Processing Dependency: perl(Error) for package: perl-Git-2.32.0-1.amzn2.0.1.noarch[0m
+[0;32m    amazon-ebs: ---> Package perl-TermReadKey.x86_64 0:2.30-20.amzn2.0.2 will be installed[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package perl-Error.noarch 1:0.17020-2.amzn2 will be installed[0m
+[0;32m    amazon-ebs: --> Finished Dependency Resolution[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Dependencies Resolved[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs:  Package              Arch       Version                   Repository      Size[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs: Installing:[0m
+[0;32m    amazon-ebs:  git                  x86_64     2.32.0-1.amzn2.0.1        amzn2-core     126 k[0m
+[0;32m    amazon-ebs:  jq                   x86_64     1.5-1.amzn2.0.2           amzn2-core     154 k[0m
+[0;32m    amazon-ebs: Installing for dependencies:[0m
+[0;32m    amazon-ebs:  emacs-filesystem     noarch     1:27.2-4.amzn2.0.1        amzn2-core      67 k[0m
+[0;32m    amazon-ebs:  git-core             x86_64     2.32.0-1.amzn2.0.1        amzn2-core     4.8 M[0m
+[0;32m    amazon-ebs:  git-core-doc         noarch     2.32.0-1.amzn2.0.1        amzn2-core     2.7 M[0m
+[0;32m    amazon-ebs:  oniguruma            x86_64     5.9.6-1.amzn2.0.4         amzn2-core     127 k[0m
+[0;32m    amazon-ebs:  perl-Error           noarch     1:0.17020-2.amzn2         amzn2-core      32 k[0m
+[0;32m    amazon-ebs:  perl-Git             noarch     2.32.0-1.amzn2.0.1        amzn2-core      43 k[0m
+[0;32m    amazon-ebs:  perl-TermReadKey     x86_64     2.30-20.amzn2.0.2         amzn2-core      31 k[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Transaction Summary[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs: Install  2 Packages (+7 Dependent packages)[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Total download size: 8.0 M[0m
+[0;32m    amazon-ebs: Installed size: 39 M[0m
+[0;32m    amazon-ebs: Downloading packages:[0m
+[0;32m    amazon-ebs: --------------------------------------------------------------------------------[0m
+[0;32m    amazon-ebs: Total                                               40 MB/s | 8.0 MB  00:00[0m
+[0;32m    amazon-ebs: Running transaction check[0m
+[0;32m    amazon-ebs: Running transaction test[0m
+[0;32m    amazon-ebs: Transaction test succeeded[0m
+[0;32m    amazon-ebs: Running transaction[0m
+[0;32m    amazon-ebs:   Installing : git-core-2.32.0-1.amzn2.0.1.x86_64                           1/9[0m
+[0;32m    amazon-ebs:   Installing : git-core-doc-2.32.0-1.amzn2.0.1.noarch                       2/9[0m
+[0;32m    amazon-ebs:   Installing : oniguruma-5.9.6-1.amzn2.0.4.x86_64                           3/9[0m
+[0;32m    amazon-ebs:   Installing : 1:perl-Error-0.17020-2.amzn2.noarch                          4/9[0m
+[0;32m    amazon-ebs:   Installing : 1:emacs-filesystem-27.2-4.amzn2.0.1.noarch                   5/9[0m
+[0;32m    amazon-ebs:   Installing : perl-TermReadKey-2.30-20.amzn2.0.2.x86_64                    6/9[0m
+[0;32m    amazon-ebs:   Installing : perl-Git-2.32.0-1.amzn2.0.1.noarch                           7/9[0m
+[0;32m    amazon-ebs:   Installing : git-2.32.0-1.amzn2.0.1.x86_64                                8/9[0m
+[0;32m    amazon-ebs:   Installing : jq-1.5-1.amzn2.0.2.x86_64                                    9/9[0m
+[0;32m    amazon-ebs:   Verifying  : perl-TermReadKey-2.30-20.amzn2.0.2.x86_64                    1/9[0m
+[0;32m    amazon-ebs:   Verifying  : git-core-doc-2.32.0-1.amzn2.0.1.noarch                       2/9[0m
+[0;32m    amazon-ebs:   Verifying  : perl-Git-2.32.0-1.amzn2.0.1.noarch                           3/9[0m
+[0;32m    amazon-ebs:   Verifying  : 1:emacs-filesystem-27.2-4.amzn2.0.1.noarch                   4/9[0m
+[0;32m    amazon-ebs:   Verifying  : jq-1.5-1.amzn2.0.2.x86_64                                    5/9[0m
+[0;32m    amazon-ebs:   Verifying  : git-2.32.0-1.amzn2.0.1.x86_64                                6/9[0m
+[0;32m    amazon-ebs:   Verifying  : git-core-2.32.0-1.amzn2.0.1.x86_64                           7/9[0m
+[0;32m    amazon-ebs:   Verifying  : 1:perl-Error-0.17020-2.amzn2.noarch                          8/9[0m
+[0;32m    amazon-ebs:   Verifying  : oniguruma-5.9.6-1.amzn2.0.4.x86_64                           9/9[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Installed:[0m
+[0;32m    amazon-ebs:   git.x86_64 0:2.32.0-1.amzn2.0.1          jq.x86_64 0:1.5-1.amzn2.0.2[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Dependency Installed:[0m
+[0;32m    amazon-ebs:   emacs-filesystem.noarch 1:27.2-4.amzn2.0.1[0m
+[0;32m    amazon-ebs:   git-core.x86_64 0:2.32.0-1.amzn2.0.1[0m
+[0;32m    amazon-ebs:   git-core-doc.noarch 0:2.32.0-1.amzn2.0.1[0m
+[0;32m    amazon-ebs:   oniguruma.x86_64 0:5.9.6-1.amzn2.0.4[0m
+[0;32m    amazon-ebs:   perl-Error.noarch 1:0.17020-2.amzn2[0m
+[0;32m    amazon-ebs:   perl-Git.noarch 0:2.32.0-1.amzn2.0.1[0m
+[0;32m    amazon-ebs:   perl-TermReadKey.x86_64 0:2.30-20.amzn2.0.2[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Complete![0m
+[0;32m    amazon-ebs: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd[0m
+[1;31m==> amazon-ebs: Existing lock /var/run/yum.pid: another copy is running as pid 2462.[0m
+[1;31m==> amazon-ebs: Another app is currently holding the yum lock; waiting for it to exit...[0m
+[1;31m==> amazon-ebs:   The other application is: yum[0m
+[1;31m==> amazon-ebs:     Memory :  48 M RSS (264 MB VSZ)[0m
+[1;31m==> amazon-ebs:     Started: Tue Dec  7 22:41:54 2021 - 00:14 ago[0m
+[1;31m==> amazon-ebs:     State  : Running, pid: 2462[0m
+[1;31m==> amazon-ebs: Another app is currently holding the yum lock; waiting for it to exit...[0m
+[1;31m==> amazon-ebs:   The other application is: yum[0m
+[1;31m==> amazon-ebs:     Memory : 110 M RSS (344 MB VSZ)[0m
+[1;31m==> amazon-ebs:     Started: Tue Dec  7 22:41:54 2021 - 00:16 ago[0m
+[1;31m==> amazon-ebs:     State  : Running, pid: 2462[0m
+[1;31m==> amazon-ebs: Existing lock /var/run/yum.pid: another copy is running as pid 2671.[0m
+[1;31m==> amazon-ebs: Another app is currently holding the yum lock; waiting for it to exit...[0m
+[1;31m==> amazon-ebs:   The other application is: yum[0m
+[1;31m==> amazon-ebs:     Memory :  55 M RSS (271 MB VSZ)[0m
+[1;31m==> amazon-ebs:     Started: Tue Dec  7 22:42:10 2021 - 00:02 ago[0m
+[1;31m==> amazon-ebs:     State  : Running, pid: 2671[0m
+[1;31m==> amazon-ebs: Another app is currently holding the yum lock; waiting for it to exit...[0m
+[1;31m==> amazon-ebs:   The other application is: yum[0m
+[1;31m==> amazon-ebs:     Memory : 154 M RSS (446 MB VSZ)[0m
+[1;31m==> amazon-ebs:     Started: Tue Dec  7 22:42:10 2021 - 00:04 ago[0m
+[1;31m==> amazon-ebs:     State  : Running, pid: 2671[0m
+[0;32m    amazon-ebs: Cleaning repos: amzn2-core amzn2extra-docker amzn2extra-nginx1[0m
+[0;32m    amazon-ebs: 17 metadata files removed[0m
+[0;32m    amazon-ebs: 6 sqlite files removed[0m
+[0;32m    amazon-ebs: 0 metadata files removed[0m
+[0;32m    amazon-ebs: Loaded plugins: extras_suggestions, langpacks, priorities, update-motd[0m
+[0;32m    amazon-ebs: Resolving Dependencies[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package nginx.x86_64 1:1.20.0-2.amzn2.0.4 will be installed[0m
+[0;32m    amazon-ebs: --> Processing Dependency: nginx-filesystem = 1:1.20.0-2.amzn2.0.4 for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: nginx-filesystem for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libssl.so.1.1(OPENSSL_1_1_1)(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libssl.so.1.1(OPENSSL_1_1_0)(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libcrypto.so.1.1(OPENSSL_1_1_0)(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libssl.so.1.1()(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libprofiler.so.0()(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Processing Dependency: libcrypto.so.1.1()(64bit) for package: 1:nginx-1.20.0-2.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package gperftools-libs.x86_64 0:2.6.1-1.amzn2 will be installed[0m
+[0;32m    amazon-ebs: ---> Package nginx-filesystem.noarch 1:1.20.0-2.amzn2.0.4 will be installed[0m
+[0;32m    amazon-ebs: ---> Package openssl11-libs.x86_64 1:1.1.1g-12.amzn2.0.4 will be installed[0m
+[0;32m    amazon-ebs: --> Processing Dependency: openssl11-pkcs11 for package: 1:openssl11-libs-1.1.1g-12.amzn2.0.4.x86_64[0m
+[0;32m    amazon-ebs: --> Running transaction check[0m
+[0;32m    amazon-ebs: ---> Package openssl11-pkcs11.x86_64 0:0.4.10-6.amzn2.0.1 will be installed[0m
+[0;32m    amazon-ebs: --> Finished Dependency Resolution[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Dependencies Resolved[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs:  Package            Arch     Version                  Repository           Size[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs: Installing:[0m
+[0;32m    amazon-ebs:  nginx              x86_64   1:1.20.0-2.amzn2.0.4     amzn2extra-nginx1   579 k[0m
+[0;32m    amazon-ebs: Installing for dependencies:[0m
+[0;32m    amazon-ebs:  gperftools-libs    x86_64   2.6.1-1.amzn2            amzn2-core          274 k[0m
+[0;32m    amazon-ebs:  nginx-filesystem   noarch   1:1.20.0-2.amzn2.0.4     amzn2extra-nginx1    23 k[0m
+[0;32m    amazon-ebs:  openssl11-libs     x86_64   1:1.1.1g-12.amzn2.0.4    amzn2-core          1.4 M[0m
+[0;32m    amazon-ebs:  openssl11-pkcs11   x86_64   0.4.10-6.amzn2.0.1       amzn2-core           61 k[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Transaction Summary[0m
+[0;32m    amazon-ebs: ================================================================================[0m
+[0;32m    amazon-ebs: Install  1 Package (+4 Dependent packages)[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Total download size: 2.3 M[0m
+[0;32m    amazon-ebs: Installed size: 6.6 M[0m
+[0;32m    amazon-ebs: Downloading packages:[0m
+[0;32m    amazon-ebs: --------------------------------------------------------------------------------[0m
+[0;32m    amazon-ebs: Total                                               11 MB/s | 2.3 MB  00:00[0m
+[0;32m    amazon-ebs: Running transaction check[0m
+[0;32m    amazon-ebs: Running transaction test[0m
+[0;32m    amazon-ebs: Transaction test succeeded[0m
+[0;32m    amazon-ebs: Running transaction[0m
+[0;32m    amazon-ebs:   Installing : 1:openssl11-libs-1.1.1g-12.amzn2.0.4.x86_64                  1/5[0m
+[0;32m    amazon-ebs:   Installing : openssl11-pkcs11-0.4.10-6.amzn2.0.1.x86_64                   2/5[0m
+[0;32m    amazon-ebs:   Installing : gperftools-libs-2.6.1-1.amzn2.x86_64                         3/5[0m
+[0;32m    amazon-ebs:   Installing : 1:nginx-filesystem-1.20.0-2.amzn2.0.4.noarch                 4/5[0m
+[0;32m    amazon-ebs:   Installing : 1:nginx-1.20.0-2.amzn2.0.4.x86_64                            5/5[0m
+[0;32m    amazon-ebs:   Verifying  : openssl11-pkcs11-0.4.10-6.amzn2.0.1.x86_64                   1/5[0m
+[0;32m    amazon-ebs:   Verifying  : 1:nginx-1.20.0-2.amzn2.0.4.x86_64                            2/5[0m
+[0;32m    amazon-ebs:   Verifying  : 1:nginx-filesystem-1.20.0-2.amzn2.0.4.noarch                 3/5[0m
+[0;32m    amazon-ebs:   Verifying  : 1:openssl11-libs-1.1.1g-12.amzn2.0.4.x86_64                  4/5[0m
+[0;32m    amazon-ebs:   Verifying  : gperftools-libs-2.6.1-1.amzn2.x86_64                         5/5[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Installed:[0m
+[0;32m    amazon-ebs:   nginx.x86_64 1:1.20.0-2.amzn2.0.4[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Dependency Installed:[0m
+[0;32m    amazon-ebs:   gperftools-libs.x86_64 0:2.6.1-1.amzn2[0m
+[0;32m    amazon-ebs:   nginx-filesystem.noarch 1:1.20.0-2.amzn2.0.4[0m
+[0;32m    amazon-ebs:   openssl11-libs.x86_64 1:1.1.1g-12.amzn2.0.4[0m
+[0;32m    amazon-ebs:   openssl11-pkcs11.x86_64 0:0.4.10-6.amzn2.0.1[0m
+[0;32m    amazon-ebs:[0m
+[0;32m    amazon-ebs: Complete![0m
+[0;32m    amazon-ebs: Installing nginx[0m
+[0;32m    amazon-ebs:   0  ansible2                 available    \[0m
+[0;32m    amazon-ebs:         [ =2.4.2  =2.4.6  =2.8  =stable ][0m
+[0;32m    amazon-ebs:   2  httpd_modules            available    [ =1.0  =stable ][0m
+[0;32m    amazon-ebs:   3  memcached1.5             available    \[0m
+[0;32m    amazon-ebs:         [ =1.5.1  =1.5.16  =1.5.17 ][0m
+[0;32m    amazon-ebs:   5  postgresql9.6            available    \[0m
+[0;32m    amazon-ebs:         [ =9.6.6  =9.6.8  =stable ][0m
+[0;32m    amazon-ebs:   6  postgresql10             available    [ =10  =stable ][0m
+[0;32m    amazon-ebs:   9  R3.4                     available    [ =3.4.3  =stable ][0m
+[0;32m    amazon-ebs:  10  rust1                    available    \[0m
+[0;32m    amazon-ebs:         [ =1.22.1  =1.26.0  =1.26.1  =1.27.2  =1.31.0  =1.38.0[0m
+[0;32m    amazon-ebs:           =stable ][0m
+[0;32m    amazon-ebs:  11  vim                      available    [ =8.0  =stable ][0m
+[0;32m    amazon-ebs:  15  php7.2                   available    \[0m
+[0;32m    amazon-ebs:         [ =7.2.0  =7.2.4  =7.2.5  =7.2.8  =7.2.11  =7.2.13  =7.2.14[0m
+[0;32m    amazon-ebs:           =7.2.16  =7.2.17  =7.2.19  =7.2.21  =7.2.22  =7.2.23[0m
+[0;32m    amazon-ebs:           =7.2.24  =7.2.26  =stable ][0m
+[0;32m    amazon-ebs:  17  lamp-mariadb10.2-php7.2  available    \[0m
+[0;32m    amazon-ebs:         [ =10.2.10_7.2.0  =10.2.10_7.2.4  =10.2.10_7.2.5[0m
+[0;32m    amazon-ebs:           =10.2.10_7.2.8  =10.2.10_7.2.11  =10.2.10_7.2.13[0m
+[0;32m    amazon-ebs:           =10.2.10_7.2.14  =10.2.10_7.2.16  =10.2.10_7.2.17[0m
+[0;32m    amazon-ebs:           =10.2.10_7.2.19  =10.2.10_7.2.22  =10.2.10_7.2.23[0m
+[0;32m    amazon-ebs:           =10.2.10_7.2.24  =stable ][0m
+[0;32m    amazon-ebs:  18  libreoffice              available    \[0m
+[0;32m    amazon-ebs:         [ =5.0.6.2_15  =5.3.6.1  =stable ][0m
+[0;32m    amazon-ebs:  19  gimp                     available    [ =2.8.22 ][0m
+[0;32m    amazon-ebs:  20  docker=latest            enabled      \[0m
+[0;32m    amazon-ebs:         [ =17.12.1  =18.03.1  =18.06.1  =18.09.9  =stable ][0m
+[0;32m    amazon-ebs:  21  mate-desktop1.x          available    \[0m
+[0;32m    amazon-ebs:         [ =1.19.0  =1.20.0  =stable ][0m
+[0;32m    amazon-ebs:  22  GraphicsMagick1.3        available    \[0m
+[0;32m    amazon-ebs:         [ =1.3.29  =1.3.32  =1.3.34  =stable ][0m
+[0;32m    amazon-ebs:  23  tomcat8.5                available    \[0m
+[0;32m    amazon-ebs:         [ =8.5.31  =8.5.32  =8.5.38  =8.5.40  =8.5.42  =8.5.50[0m
+[0;32m    amazon-ebs:           =stable ][0m
+[0;32m    amazon-ebs:  24  epel                     available    [ =7.11  =stable ][0m
+[0;32m    amazon-ebs:  25  testing                  available    [ =1.0  =stable ][0m
+[0;32m    amazon-ebs:  26  ecs                      available    [ =stable ][0m
+[0;32m    amazon-ebs:  27  corretto8                available    \[0m
+[0;32m    amazon-ebs:         [ =1.8.0_192  =1.8.0_202  =1.8.0_212  =1.8.0_222  =1.8.0_232[0m
+[0;32m    amazon-ebs:           =1.8.0_242  =stable ][0m
+[0;32m    amazon-ebs:  28  firecracker              available    [ =0.11  =stable ][0m
+[0;32m    amazon-ebs:  29  golang1.11               available    \[0m
+[0;32m    amazon-ebs:         [ =1.11.3  =1.11.11  =1.11.13  =stable ][0m
+[0;32m    amazon-ebs:  30  squid4                   available    [ =4  =stable ][0m
+[0;32m    amazon-ebs:  31  php7.3                   available    \[0m
+[0;32m    amazon-ebs:         [ =7.3.2  =7.3.3  =7.3.4  =7.3.6  =7.3.8  =7.3.9  =7.3.10[0m
+[0;32m    amazon-ebs:           =7.3.11  =7.3.13  =stable ][0m
+[0;32m    amazon-ebs:  32  lustre2.10               available    \[0m
+[0;32m    amazon-ebs:         [ =2.10.5  =2.10.8  =stable ][0m
+[0;32m    amazon-ebs:  33  java-openjdk11           available    [ =11  =stable ][0m
+[0;32m    amazon-ebs:  34  lynis                    available    [ =stable ][0m
+[0;32m    amazon-ebs:  35  kernel-ng                available    [ =stable ][0m
+[0;32m    amazon-ebs:  36  BCC                      available    [ =0.x  =stable ][0m
+[0;32m    amazon-ebs:  37  mono                     available    [ =5.x  =stable ][0m
+[0;32m    amazon-ebs:  38  nginx1=latest            enabled      [ =stable ][0m
+[0;32m    amazon-ebs:  39  ruby2.6                  available    [ =2.6  =stable ][0m
+[0;32m    amazon-ebs:  40  mock                     available    [ =stable ][0m
+[0;32m    amazon-ebs:  41  postgresql11             available    [ =11  =stable ][0m
+[0;32m    amazon-ebs:  42  php7.4                   available    [ =stable ][0m
+[0;32m    amazon-ebs:  43  livepatch                available    [ =stable ][0m
+[0;32m    amazon-ebs:  44  python3.8                available    [ =stable ][0m
+[0;32m    amazon-ebs:  45  haproxy2                 available    [ =stable ][0m
+[0;32m    amazon-ebs:  46  collectd                 available    [ =stable ][0m
+[0;32m    amazon-ebs:  47  aws-nitro-enclaves-cli   available    [ =stable ][0m
+[0;32m    amazon-ebs:  48  R4                       available    [ =stable ][0m
+[0;32m    amazon-ebs:  49  kernel-5.4               available    [ =stable ][0m
+[0;32m    amazon-ebs:  50  selinux-ng               available    [ =stable ][0m
+[0;32m    amazon-ebs:  51  php8.0                   available    [ =stable ][0m
+[0;32m    amazon-ebs:  52  tomcat9                  available    [ =stable ][0m
+[0;32m    amazon-ebs:  53  unbound1.13              available    [ =stable ][0m
+[0;32m    amazon-ebs:  54  mariadb10.5              available    [ =stable ][0m
+[0;32m    amazon-ebs:  55  kernel-5.10              available    [ =stable ][0m
+[0;32m    amazon-ebs:  56  redis6                   available    [ =stable ][0m
+[0;32m    amazon-ebs:  57  ruby3.0                  available    [ =stable ][0m
+[0;32m    amazon-ebs:  58  postgresql12             available    [ =stable ][0m
+[0;32m    amazon-ebs:  59  postgresql13             available    [ =stable ][0m
+[0;32m    amazon-ebs:  60  mock2                    available    [ =stable ][0m
+[0;32m    amazon-ebs:  61  dnsmasq2.85              available    [ =stable ][0m
+[1;31m==> amazon-ebs: WARNING: Running pip install with root privileges is generally not a good idea. Try `pip3 install --user` instead.[0m
+[0;32m    amazon-ebs: Collecting pipenv[0m
+[0;32m    amazon-ebs:   Downloading pipenv-2021.11.23-py2.py3-none-any.whl (3.6 MB)[0m
+[0;32m    amazon-ebs: Collecting virtualenv[0m
+[0;32m    amazon-ebs:   Downloading virtualenv-20.10.0-py2.py3-none-any.whl (5.6 MB)[0m
+[0;32m    amazon-ebs: Requirement already satisfied: setuptools>=36.2.1 in /usr/lib/python3.7/site-packages (from pipenv) (49.1.3)[0m
+[0;32m    amazon-ebs: Collecting virtualenv-clone>=0.2.5[0m
+[0;32m    amazon-ebs:   Downloading virtualenv_clone-0.5.7-py3-none-any.whl (6.6 kB)[0m
+[0;32m    amazon-ebs: Requirement already satisfied: pip>=18.0 in /usr/lib/python3.7/site-packages (from pipenv) (20.2.2)[0m
+[0;32m    amazon-ebs: Collecting certifi[0m
+[0;32m    amazon-ebs:   Downloading certifi-2021.10.8-py2.py3-none-any.whl (149 kB)[0m
+[0;32m    amazon-ebs: Collecting six<2,>=1.9.0[0m
+[0;32m    amazon-ebs:   Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)[0m
+[0;32m    amazon-ebs: Collecting distlib<1,>=0.3.1[0m
+[0;32m    amazon-ebs:   Downloading distlib-0.3.3-py2.py3-none-any.whl (496 kB)[0m
+[0;32m    amazon-ebs: Collecting backports.entry-points-selectable>=1.0.4[0m
+[0;32m    amazon-ebs:   Downloading backports.entry_points_selectable-1.1.1-py2.py3-none-any.whl (6.2 kB)[0m
+[0;32m    amazon-ebs: Collecting filelock<4,>=3.2[0m
+[0;32m    amazon-ebs:   Downloading filelock-3.4.0-py3-none-any.whl (9.8 kB)[0m
+[0;32m    amazon-ebs: Collecting platformdirs<3,>=2[0m
+[0;32m    amazon-ebs:   Downloading platformdirs-2.4.0-py3-none-any.whl (14 kB)[0m
+[0;32m    amazon-ebs: Collecting importlib-metadata>=0.12; python_version < "3.8"[0m
+[0;32m    amazon-ebs:   Downloading importlib_metadata-4.8.2-py3-none-any.whl (17 kB)[0m
+[0;32m    amazon-ebs: Collecting typing-extensions>=3.6.4; python_version < "3.8"[0m
+[0;32m    amazon-ebs:   Downloading typing_extensions-4.0.1-py3-none-any.whl (22 kB)[0m
+[0;32m    amazon-ebs: Collecting zipp>=0.5[0m
+[0;32m    amazon-ebs:   Downloading zipp-3.6.0-py3-none-any.whl (5.3 kB)[0m
+[0;32m    amazon-ebs: Installing collected packages: six, distlib, typing-extensions, zipp, importlib-metadata, backports.entry-points-selectable, filelock, platformdirs, virtualenv, virtualenv-clone, certifi, pipenv[0m
+[1;31m==> amazon-ebs:   WARNING: The script virtualenv is installed in '/usr/local/bin' which is not on PATH.[0m
+[1;31m==> amazon-ebs:   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.[0m
+[1;31m==> amazon-ebs:   WARNING: The script virtualenv-clone is installed in '/usr/local/bin' which is not on PATH.[0m
+[1;31m==> amazon-ebs:   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.[0m
+[1;31m==> amazon-ebs:   WARNING: The scripts pipenv and pipenv-resolver are installed in '/usr/local/bin' which is not on PATH.[0m
+[1;31m==> amazon-ebs:   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.[0m
+[0;32m    amazon-ebs: Successfully installed backports.entry-points-selectable-1.1.1 certifi-2021.10.8 distlib-0.3.3 filelock-3.4.0 importlib-metadata-4.8.2 pipenv-2021.11.23 platformdirs-2.4.0 six-1.16.0 typing-extensions-4.0.1 virtualenv-20.10.0 virtualenv-clone-0.5.7 zipp-3.6.0[0m
+[1;31m==> amazon-ebs: Cloning into 'flask-aws-storage'...[0m
+[1;31m==> amazon-ebs: Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.[0m
+[1;31m==> amazon-ebs: Created symlink from /etc/systemd/system/multi-user.target.wants/imgmgr.service to /etc/systemd/system/imgmgr.service.[0m
+[1;32m==> amazon-ebs: Stopping the source instance...[0m
+[0;32m    amazon-ebs: Stopping instance[0m
+[1;32m==> amazon-ebs: Waiting for the instance to stop...[0m
+[1;32m==> amazon-ebs: Creating AMI my-ami-1638916889 from instance i-03e7c0bdbe54cd2a7[0m
+[0;32m    amazon-ebs: AMI: ami-019eac4d73d1ede83[0m
+[1;32m==> amazon-ebs: Waiting for AMI to become ready...[0m
+[1;32m==> amazon-ebs: Adding tags to AMI (ami-019eac4d73d1ede83)...[0m
+[1;32m==> amazon-ebs: Tagging snapshot: snap-00a4d290762825b14[0m
+[1;32m==> amazon-ebs: Creating AMI tags[0m
+[0;32m    amazon-ebs: Adding tag: "created-by": "packer"[0m
+[0;32m    amazon-ebs: Adding tag: "application": "img-mgr"[0m
+[1;32m==> amazon-ebs: Creating snapshot tags[0m
+[1;32m==> amazon-ebs: Terminating the source AWS instance...[0m
+[1;32m==> amazon-ebs: Cleaning up any extra volumes...[0m
+[1;32m==> amazon-ebs: No volumes to clean up, skipping[0m
+[1;32m==> amazon-ebs: Deleting temporary security group...[0m
+[1;32m==> amazon-ebs: Deleting temporary keypair...[0m
+[1;32mBuild 'amazon-ebs' finished.[0m
+
+==> Builds finished. The artifacts of successful builds are:
+--> amazon-ebs: AMIs were created:
+us-west-2: ami-019eac4d73d1ede83
+
